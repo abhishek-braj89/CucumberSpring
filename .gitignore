@@ -1,0 +1,29 @@
+ipse files
+.settings
+.project
+.classpath
+.springBeans
+
+# OSX files
+.DS_Store
+
+# ideaJ files
+.idea
+.iml
+#target folder
+target
+#svn folder
+.svn
+
+# Gradle build folder
+build
+/client/build
+
+# Eclipse output folder
+bin
+
+
+# Gradle temp files
+.gradle
+
+/out/

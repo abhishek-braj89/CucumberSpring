@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.abhi.cucspring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets{
+	integrationTest{
+		compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+        java.srcDirs += 'src/integrationTest/java'
+        resources.srcDirs += 'src/integrationTest/resources'
+	}
+}
+
+configurations {
+        integrationTestCompile.extendsFrom testCompile
+        integrationTestRuntime.extendsFrom testRuntime
+   }
+    
+    
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile group: 'junit', name: 'junit', version:'4.12'
+	// https://mvnrepository.com/artifact/info.cukes/cucumber-java
+	testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+	testCompile group: 'info.cukes', name: 'cucumber-junit', version:'1.2.5'
+	testCompile group: 'info.cukes', name: 'cucumber-spring', version: '1.2.5'
+	// https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
+	testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+	
+	
+}
+
+task integrationTest(type:Test){
+   testClassesDirs = sourceSets.integrationTest.output.classesDirs
+   classpath = sourceSets.integrationTest.runtimeClasspath   
+   testLogging.showStandardStreams =  true
+}
